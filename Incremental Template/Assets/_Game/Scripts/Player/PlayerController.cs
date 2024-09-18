@@ -110,5 +110,10 @@ public class PlayerController : MonoBehaviour
         {
             EndGameReach();
         }
+        
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Time.timeScale = Time.timeScale == 1 ? 3 : 1;
+        }
     }
 }

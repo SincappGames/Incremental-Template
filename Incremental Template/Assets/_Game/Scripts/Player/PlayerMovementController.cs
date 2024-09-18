@@ -27,8 +27,6 @@ public class PlayerMovementController : MonoBehaviour
             SwerveMovement();
             ClampPosition();
         }
-
-        SpeedMultiplier = Input.GetKey(KeyCode.W) ? 2 : 1;
     }
 
     private void SwerveMovement()

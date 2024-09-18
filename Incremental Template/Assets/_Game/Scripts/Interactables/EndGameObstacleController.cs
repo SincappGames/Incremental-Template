@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using MoreMountains.NiceVibrations;
+using Lofelt.NiceVibrations;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -26,7 +26,7 @@ public class EndGameObstacleController : BaseInteractableController
     {
         base.TakeBulletDamage(damageAmount, bullet);
         
-        MMVibrationManager.Haptic(HapticTypes.SoftImpact);
+        HapticPatterns.PlayPreset(HapticPatterns.PresetType.MediumImpact);
         transform.DOKill();
         transform.DOScale(_startScaleX + .05f, .07f).OnComplete(() => { transform.DOScale(_startScaleX, .07f); });
         EndGameObstacleNumber -= damageAmount;

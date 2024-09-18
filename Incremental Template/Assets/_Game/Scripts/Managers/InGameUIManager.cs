@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using ElephantSDK;
-using MoreMountains.NiceVibrations;
+using Lofelt.NiceVibrations;
 using SincappStudio;
 using TMPro;
 using UnityEngine;
@@ -49,7 +49,7 @@ public class InGameUIManager : MonoSingleton<InGameUIManager>
         _levelText.SetText($"LEVEL {PersistData.Instance.CurrentLevel}");
         var isHapticOn = PlayerPrefsX.GetBool("HapticMode",true);
         _vibrationSlider.value = isHapticOn ? 1 : 0;
-        MMVibrationManager.SetHapticsActive(isHapticOn);
+        HapticController.hapticsEnabled = isHapticOn;
         SetIncrementalUI();
     }
 
@@ -189,7 +189,7 @@ public class InGameUIManager : MonoSingleton<InGameUIManager>
     {
         _vibrationSlider.value = _vibrationSlider.value == 1 ? 0 : 1;
         bool isHapticOn = _vibrationSlider.value == 1;
-        MMVibrationManager.SetHapticsActive(isHapticOn);
+        HapticController.hapticsEnabled = isHapticOn;
         PlayerPrefsX.SetBool("HapticMode", isHapticOn);
     }
 

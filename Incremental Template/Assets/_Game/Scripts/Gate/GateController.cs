@@ -1,7 +1,6 @@
-using System.Globalization;
 using UnityEngine;
 using DG.Tweening;
-using MoreMountains.NiceVibrations;
+using Lofelt.NiceVibrations;
 using Sirenix.OdinInspector;
 using TMPro;
 
@@ -55,7 +54,7 @@ public class GateController : MonoBehaviour
             Destroy(gameObject);
         }).SetEase(Ease.InBack);
         
-        MMVibrationManager.Haptic(HapticTypes.MediumImpact);
+        HapticPatterns.PlayPreset(HapticPatterns.PresetType.MediumImpact);
         EventManager.OnGateCollect?.Invoke(_skillType, _skillAmount);
     }
     
@@ -90,7 +89,7 @@ public class GateController : MonoBehaviour
         }
             
         _skillAmount += _powerAmount;
-        MMVibrationManager.Haptic(HapticTypes.SoftImpact);
+        HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);
 
         _skillAmountText.transform.DOScale(Vector3.one * 1.15f, .075f).OnComplete(() =>
         {
