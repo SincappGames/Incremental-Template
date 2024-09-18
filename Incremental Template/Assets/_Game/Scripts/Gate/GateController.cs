@@ -46,6 +46,8 @@ public class GateController : MonoBehaviour
     
     public void UseSkill()
     {
+        if (_isGateLock) return;
+        
         transform.DOKill();
 
         transform.DOMoveY(-5, .4f).OnComplete(() =>
@@ -142,6 +144,12 @@ public class GateController : MonoBehaviour
             _gateMesh.materials[0].color = new Color(0f, 0.69f, 0.12f, 1);
             _gateMesh.materials[1].color = new Color(0.06f, 0.6f, 0.13f, 0.671f);
         }
+    }
+    
+    public void SetGateGrey()
+    {
+        _gateMesh.materials[0].color = new Color(0.24f, 0.22f, 0.24f);
+        _gateMesh.materials[1].color = new Color(0.35f, 0.36f, 0.34f, 0.66f);
     }
 
     public void DestroyGate()

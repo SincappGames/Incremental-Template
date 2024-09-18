@@ -122,12 +122,35 @@ public class GateGroupController : BaseInteractableController, IDataCollectable
         base.InteractPlayer(playerTransform);
         
         GateController hittedGate = FindInteractedGate(playerTransform.position.x);
+        GateController otherGate = FindInteractedGate(-playerTransform.position.x);
+
         hittedGate.UseSkill();
         transform.DOKill();
+        otherGate.SetGateGrey();
         
         foreach (GateController gateController in _gateControllers)
         {
             gateController.DestroyGate();
+        }
+    }
+    
+    private void DeactiveGates()
+    {
+        gameObject.layer = 0;
+
+        foreach (GateController gateController in _gateControllers)
+        {
+            gateController.SetGateGrey();
+        }
+    }
+
+    private void Update()
+    {
+        if (gameObject.layer == 0) return;
+        
+        if (LevelManager.Instance.PlayerController.transform.position.z  > transform.position.z + .4f)
+        {
+            DeactiveGates();
         }
     }
 
