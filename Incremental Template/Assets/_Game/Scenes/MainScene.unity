@@ -7887,9 +7887,9 @@ MonoBehaviour:
   _rewardedCanvas: {fileID: 1493474761}
   _levelText: {fileID: 941392704}
   incrementalsObj: {fileID: 244716967}
-  _fireRateButton: {fileID: 0}
-  _rangeButton: {fileID: 0}
-  _incomeButton: {fileID: 0}
+  _fireRateButton: {fileID: 494781681}
+  _rangeButton: {fileID: 1432277603}
+  _incomeButton: {fileID: 1441373689}
   _fireRateUpgradeMoney: {fileID: 1421616995}
   _fireRateUpgradeLevel: {fileID: 1105512452}
   _rangeUpgradeMoney: {fileID: 376872240}
