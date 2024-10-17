@@ -117,16 +117,19 @@ namespace SincappStudio
                 if (Mathf.Abs(number) >= pair.Key)
                 {
                     float roundedNumber = number / pair.Key;
-                    return roundedNumber.ToString("F1") + pair.Value;
+
+                    if (Mathf.Round(roundedNumber) == roundedNumber)
+                    {
+                        return roundedNumber.ToString("0") + pair.Value;
+                    }
+                    else
+                    {
+                        return roundedNumber.ToString("F1", CultureInfo.InvariantCulture) + pair.Value;
+                    }
                 }
             }
 
             return number.ToString(stringFormat);
-        }
-        
-        public static string AbbreviateNumberFloat(float floatValue)
-        {
-            return Mathf.Approximately(floatValue, Mathf.Round(floatValue)) ? floatValue.ToString("0") : floatValue.ToString("F1", CultureInfo.InvariantCulture);
         }
     }
 }

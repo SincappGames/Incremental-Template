@@ -9,17 +9,10 @@ public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField] private Transform _shootPosTransform;
     [SerializeField] private BulletController _bullet;
-    private ObjectPool<BulletController> _bulletPool;
     private float _range;
     private float _fireRate;
     private float _collectedGateFireRateAmount;
     private float _collectedGateRangeAmount;
-
-    private void Awake()
-    {
-        _bulletPool = new ObjectPool<BulletController>(InstantiateBullet, OnTakeBulletFromPool, OnReturnBulletToPool,
-            OnDestroyBullet, true, 20, 100);
-    }
 
     public void StartShooting()
     {
@@ -53,12 +46,7 @@ public class PlayerAttackController : MonoBehaviour
         while (PlayerController.PlayerState == PlayerController.PlayerStates.Run
                || PlayerController.PlayerState == PlayerController.PlayerStates.OnFinishWall)
         {
-            // _rightHand.DOLocalRotate(new Vector3(-10,0,0), .1f).SetEase(Ease.OutSine).OnComplete(() =>
-            // {
-            //     _rightHand.DOLocalRotate(Vector3.zero, _fireRate);
-            // });
-
-            _bulletPool.Get().Shoot(_range, transform);
+            InstantiateBullet().Shoot(1,_range, transform);
             yield return new WaitForSeconds(_fireRate);
         }
     }
@@ -66,25 +54,6 @@ public class PlayerAttackController : MonoBehaviour
     private BulletController InstantiateBullet()
     {
         var bullet = Instantiate(_bullet, _shootPosTransform.position, Quaternion.identity);
-        bullet.SetPool(_bulletPool);
         return bullet;
-    }
-
-    private void OnTakeBulletFromPool(BulletController bullet)
-    {
-        bullet.transform.position = _shootPosTransform.position;
-        bullet.transform.rotation = Quaternion.identity;
-        bullet.gameObject.SetActive(true);
-    }
-
-    private void OnReturnBulletToPool(BulletController bullet)
-    {
-        bullet.transform.DOKill();
-        bullet.gameObject.SetActive(false);
-    }
-
-    private void OnDestroyBullet(BulletController bullet)
-    {
-        Destroy(bullet.gameObject);
     }
 }

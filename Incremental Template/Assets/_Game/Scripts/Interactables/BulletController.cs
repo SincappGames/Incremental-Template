@@ -1,33 +1,21 @@
-using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BulletController : MonoBehaviour
+public class BulletController : BaseBulletController
 {
-    public float BulletPower { get; set; } = 1;
-    private ObjectPool<BulletController> _currentPool;
-    
-    public void SetPool(ObjectPool<BulletController> pool)
+    public override void Shoot(float power, float range, Transform playerPos)
     {
-        _currentPool = pool;
-    }
-    
-    public void Shoot(float range, Transform playerPos)
-    {
-        transform.DOMoveZ(playerPos.position.z + range, 20).SetSpeedBased().SetEase(Ease.Linear).OnComplete(() =>
-        {
-            _currentPool.Release(this);
-        });
+        base.Shoot(power, range, playerPos);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void DestroySelf()
     {
-        var damagable = other.GetComponent<IDamageable>();
-
-        if (damagable != null)
-        {
-            damagable.TakeBulletDamage(BulletPower, this);
-            _currentPool.Release(this);
-        }
+        base.DestroySelf();
+    }
+    
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
     }
 }

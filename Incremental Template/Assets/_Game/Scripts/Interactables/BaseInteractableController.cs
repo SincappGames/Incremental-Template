@@ -7,7 +7,7 @@ public class BaseInteractableController : MonoBehaviour, IDamageable, IInteracta
 {
     protected bool _isHit;
 
-    public virtual void TakeBulletDamage(float damageAmount, BulletController bullet)
+    public virtual void TakeBulletDamage(float damageAmount, BaseBulletController bullet)
     {
     }
 

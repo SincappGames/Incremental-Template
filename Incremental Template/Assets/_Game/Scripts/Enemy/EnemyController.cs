@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : BaseInteractableController
 {
-    public override void TakeBulletDamage(float damageAmount, BulletController bullet)
+    public override void TakeBulletDamage(float damageAmount, BaseBulletController bullet)
     {
         base.TakeBulletDamage(damageAmount, bullet);
     }

@@ -22,7 +22,7 @@ public class EndGameObstacleController : BaseInteractableController
         _startScaleX = transform.localScale.x;
     }
 
-    public override void TakeBulletDamage(float damageAmount, BulletController bullet)
+    public override void TakeBulletDamage(float damageAmount, BaseBulletController bullet)
     {
         base.TakeBulletDamage(damageAmount, bullet);
         
